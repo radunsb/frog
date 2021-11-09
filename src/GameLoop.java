@@ -1,17 +1,20 @@
+package src;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class GameLoop implements KeyListener {
+
     private int score;
 
-    public GameLoop(){
+    public GameLoop() {
 
     }
 
     /**
      * Creates a new level, creating a new board for it
      */
-    public void runLevel(){
+    public void runLevel() {
         Board b = new Board();
         b.buildBoard();
     }
@@ -24,9 +27,10 @@ public class GameLoop implements KeyListener {
      * 3 = right
      * 4 = down
      * can be changed later if we want
+     *
      * @return direction frog should move
      */
-    public int frogMove(){
+    public int frogMove() {
         return -1;
     }
 
