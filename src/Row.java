@@ -18,8 +18,9 @@ public class Row {
     /**
      * Takes numEnemies and assigns that number of enemies to random positions in the row,
      * and the rest of the units to ground
+     * @param numEnemies number of enemies per row, taken from queue in GameLoop
      */
-    public void buildRow() {
+    public void buildRow(int numEnemies) {
         for (int i = 0; i < rowSize; i++) {
             units.set(i, new Ground(i));
         }

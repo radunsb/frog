@@ -9,6 +9,10 @@ public class GameLoop implements KeyListener {
 
     private int score;
 
+    /**
+     * Big queue of the number of enemies. Basically has the numbers for every level
+     * and continues through until the game is completed
+     */
     private PriorityQueue<Integer> numEnemies = new PriorityQueue<>();
 
     public GameLoop() {
