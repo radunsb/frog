@@ -10,10 +10,13 @@ public class Board {
     private Player frog;
     //Height of board/number of rows
     final int numRows = 20;
+    //Provides starting time in which board is built
+    private int startingTime;
 
     public Board() {
         this.rows = new LinkedList<>();
         this.frog = new Player(12, 20, 0);
+        this.startingTime = -1;
     }
 
     /**
@@ -28,9 +31,10 @@ public class Board {
      * to see if the player should shift. Then shifts board.
      *
      * @param frogShift determines which direction the frog should move
+     * @param time time since board has been built
      * @return true if board shifts, false if it doesn't
      */
-    public boolean boardShift(int frogShift) {
+    public boolean boardShift(int frogShift, int time) {
         return false;
     }
 
