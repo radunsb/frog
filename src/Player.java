@@ -1,6 +1,7 @@
 package src;
 
 public class Player extends Unit {
+    int playerX;
     //index of row of frog's current position
     int playerY;
     //direction frog is currently moving
@@ -18,6 +19,14 @@ public class Player extends Unit {
      */
     public int getY(){
         return playerY;
+    }
+
+    public void setX(int x){
+        this.playerX = x;
+    }
+
+    public void setY(int y){
+        this.playerY = y;
     }
 
     /**
