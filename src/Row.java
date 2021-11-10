@@ -3,10 +3,13 @@ package src;
 import java.util.ArrayList;
 
 public class Row {
-
+    //each row is filled with an arraylist of units, some of which get set to enemy and the rest to ground
     private ArrayList<Unit> units;
+    //after how many frames does this row update position
     int rowSpeed;
+    //number of enemies in this row
     int numEnemies;
+    //width of board/length of row
     final int rowSize = 24;
 
     public Row(int rowSpeed, int numEnemies) {

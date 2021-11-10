@@ -56,4 +56,11 @@ public class Board {
     public void clearBoard() {
 
     }
+
+    /**
+     *  Resets the frog's position and changes to the next level
+     */
+    public void completeBoard(){
+
+    }
 }

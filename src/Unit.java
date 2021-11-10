@@ -8,4 +8,7 @@ public abstract class Unit {
         this.x = x;
     }
 
+    public int getX(){
+        return x;
+    }
 }
