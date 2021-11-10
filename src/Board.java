@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Board {
-
+    //List of the rows in the current board from top (goal) to bottom (start)
     private LinkedList<Row> rows;
+    //Player Unit
     private Player frog;
+    //Height of board/number of rows
     final int numRows = 20;
 
     public Board() {
         this.rows = new LinkedList<>();
-        this.frog = new Player(12, 20);
+        this.frog = new Player(12, 20, 0);
     }
 
     /**
@@ -39,9 +41,11 @@ public class Board {
      * @param currentRow current row the frog is in
      * @return if the frog is currently in the same spot as an enemy object
      */
-    public boolean checkCollision(int currentRow) {
+    public boolean checkCollisionRow(int currentRow) {
         return false;
     }
+
+
 
     /**
      * Draws the board inside the console each time it shifts
