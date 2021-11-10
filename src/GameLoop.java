@@ -14,7 +14,7 @@ public class GameLoop implements KeyListener {
      * and continues through until the game is completed.
      * Will use iterator to keep track of position in queue
      */
-    private PriorityQueue<Integer> numEnemies = new PriorityQueue<>();
+    private PriorityQueue<ArrayList<Integer>> numEnemies = new PriorityQueue<>();
 
     public GameLoop() {
 
@@ -22,8 +22,17 @@ public class GameLoop implements KeyListener {
 
     /**
      * Creates a new level, creating a new board for it and resetting the frog's position
+     * @param numLevel current level on
      */
-    public void runLevel() {
+    public void runLevel(int numLevel) {
+
+    }
+
+    /**
+     * Same as runLevel but is called when the frog dies to restart the current level
+     * @param numLevel current level on
+     */
+    public void restartLevel(int numLevel){
 
     }
 

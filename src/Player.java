@@ -5,6 +5,7 @@ public class Player extends Unit {
     int playerY;
     //direction frog is currently moving
     int movement;
+
     public Player(int playerX, int playerY, int movement) {
         super(playerX);
         this.playerY = playerY;
