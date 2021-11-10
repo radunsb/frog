@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 public class Board {
     //List of the rows in the current board from top (goal) to bottom (start)
-    private LinkedList<Row> rows;
+    private ArrayList<Row> rows;
     //Player Unit
     private Player frog;
     //Height of board/number of rows
@@ -14,7 +14,7 @@ public class Board {
     private int startingTime;
 
     public Board() {
-        this.rows = new LinkedList<>();
+        this.rows = new ArrayList<>();
         this.frog = new Player(12, 20, 0);
         this.startingTime = -1;
     }
