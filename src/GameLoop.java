@@ -2,21 +2,32 @@ package src;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 public class GameLoop implements KeyListener {
 
     private int score;
+
+    private PriorityQueue<Integer> numEnemies = new PriorityQueue<>();
 
     public GameLoop() {
 
     }
 
     /**
-     * Creates a new level, creating a new board for it
+     * Creates a new level, creating a new board for it and resetting the frog's position
      */
     public void runLevel() {
-        Board b = new Board();
-        b.buildBoard();
+
+    }
+
+    /**
+     * Gets the score for the current level based on the remaining time
+     * @return level score, which will be added to total score
+     */
+    public int levelScore(int timeLeft){
+        return -1;
     }
 
     /**
