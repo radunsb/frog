@@ -15,15 +15,31 @@ public class ChristiansTests {
 //        System.out.print(sb.toString());
 
 
-        // Testing initializing a board. Hardcoded difficulty values in their respective classes
-        Board b = new Board();
-        b.buildBoard();
-        b.drawBoard();
-        // Testing shifting rows
-        for (int i = 0; i < 3; i++) {
-            System.out.println();
-            b.boardShift(0);
-            b.drawBoard();
+//        // Testing initializing a board. Hardcoded difficulty values in their respective classes
+//        Board b = new Board();
+//        b.buildBoard();
+//        b.drawBoard();
+//        // Testing shifting rows
+//        for (int i = 0; i < 3; i++) {
+//            System.out.println();
+//            try {
+//                b.boardShift(0);
+//            } catch (Exception e) {
+//                System.out.println(e);
+//                break;
+//            }
+//            b.drawBoard();
+//        }
+
+        Row r = new Row(1,0);
+        r.setEnemy(5);
+        r.setFrog(10);
+        System.out.println(r.toString());
+        try {
+            r.rowShift(1);
+            System.out.println(r.toString());
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 }

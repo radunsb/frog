@@ -40,7 +40,7 @@ public class Board {
      * @param frogShift determines which direction the frog should move
      * @return true if any part of board shifts, false if it doesn't
      */
-    public boolean boardShift(int frogShift) {
+    public boolean boardShift(int frogShift) throws Exception {
         numFrames++;
         // TODO: Move frog to new row. This can happen purely on Board.java class level
         // TODO: Calculate shifting rows. This stage could handle collision
@@ -90,6 +90,11 @@ public class Board {
      *  Resets the frog's position and changes to the next level
      */
     public void completeBoard(){
+
+    }
+
+    // Methods for testing purposes
+    public void setFrog(int x, int y) {
 
     }
 }

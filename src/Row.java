@@ -40,18 +40,22 @@ public class Row {
     /**
      * Moves every unit in row one to right, and the furthest one to the first position
      */
-    public void rowShift(int frames) {
-        // This implementation of row shift simply deletes the last element of the
-        // ArrayList and adds it to the front of the list. This is good for effeciency
-        // but bad for collision checking, as this will simply move the frog character over.
-        // One approach from here would probably be to update each individual unit's
-        // x-coordinates (not the frog's) and check for collision based on that.
-        // Alternatively, this could iterate through the list and try to assign the unit in the
-        // current location to the one in the next location. Collision testing could happen there.
-        // This approach makes collision testing much more simple but the act of row shifting more
-        // challenging. I personally think this approach makes more sense.
-        // Below is the first (IMO bad) implementation, but it works for now
+    public void rowShift(int frames) throws Exception {
+        // If the current row is set to move
         if (frames % rowSpeed == 0) {
+            for (int i = 0; i < rowSize-1; i++) {
+                // Checks if there is an enemy to the left of a frog
+                if (units.get(i) instanceof Enemy) {
+                    if (units.get(i+1) instanceof Player) {
+                        // Throws collision detected error
+                        throw new Exception("Collision detected");
+                    }
+                    // Checks if there is a frog in the current position
+                    // If so, move frog to left to compensate for row shift
+                } else if (units.get(i) instanceof Player) {
+                    units.add(i-1, units.remove(i));
+                }
+            }
             units.add(0, units.remove(rowSize-1));
         }
         // rowSpeed explanation time!!! if rowspeed is set to 4, it will shift every 4 frames
@@ -77,5 +81,14 @@ public class Row {
             sb.append(u.toString());
         }
         return sb.toString();
+    }
+
+    // Methods for testing purposes
+    public void setFrog(int x) {
+        units.set(x, new Player(0,0,0));
+    }
+
+    public void setEnemy(int x) {
+        units.set(x, new Enemy(x));
     }
 }
