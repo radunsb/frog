@@ -1,11 +1,13 @@
 package src;
 
 public class Player extends Unit {
-    int playerX;
+    private int playerX;
     //index of row of frog's current position
-    int playerY;
+    private int playerY;
     //direction frog is currently moving
-    int movement;
+    private int movement;
+    //Character used as sprite
+    private final String sprite = "H";
 
     public Player(int playerX, int playerY, int movement) {
         super(playerX);
@@ -36,5 +38,10 @@ public class Player extends Unit {
      */
     public boolean checkCollision(Enemy other){
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return sprite;
     }
 }
