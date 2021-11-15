@@ -10,12 +10,13 @@ public class Row {
     //number of enemies in this row
     int numEnemies;
     //width of board/length of row
-    final int rowSize = 48;
+    final int rowSize;
 
-    public Row(int rowSpeed, int numEnemies) {
+    public Row(int rowSpeed, int numEnemies, int rowSize) {
         this.units = new ArrayList<>();
         this.rowSpeed = rowSpeed;
         this.numEnemies = numEnemies;
+        this.rowSize = rowSize;
         // Initializes row with all ground units
         for (int i = 0; i < rowSize; i++) {
             units.add(new Ground(i));

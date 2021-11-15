@@ -15,6 +15,8 @@ public class Board {
     // Informs rows when to shift. Increased every time boardShift/nextBoard is called
     private int numFrames;
 
+    private final int rowSize = 48;
+
     private int frogCurrentRow = 0;
     private int frogXIndex = 24;
 
@@ -32,7 +34,7 @@ public class Board {
         // Rowspeed hard coded to 1
         // Enemies hard coded to the number row
         for (int i = 0; i < numRows; i++) {
-            rows.add(new Row(1,i));
+            rows.add(new Row(1, i, rowSize));
         }
     }
 
