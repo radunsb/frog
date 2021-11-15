@@ -37,7 +37,7 @@ public class Player extends Unit {
      * @return true if collision is happening
      */
     public boolean checkCollision(Enemy other){
-        return false;
+        return this.getX() == other.getX();
     }
 
     @Override
