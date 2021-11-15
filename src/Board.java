@@ -109,6 +109,10 @@ public class Board {
         rows.get(frogCurrentRow).frogAppears(frogXIndex);
     }
 
+    public void setFrog(int row){
+        rows.get(row).frogAppears(frogXIndex);
+    }
+
     public void moveFrog(int moveCode) throws Exception, ArrayIndexOutOfBoundsException {
         if (moveCode < 0 || moveCode > 4) {
             throw new IllegalArgumentException("Move codes should be within 0 and 4");
