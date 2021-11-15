@@ -40,9 +40,9 @@ public class Row {
     /**
      * Moves every unit in row one to right, and the furthest one to the first position
      */
-    public void rowShift(int frames) throws Exception {
-        // If the current row is set to move
-        if (frames % rowSpeed == 0) {
+    public void rowShift(int numFrames) throws Exception {
+        // If the current row is set to shift
+        if (shouldShift(numFrames)) {
             for (int i = 0; i < rowSize-1; i++) {
                 // Checks if there is an enemy to the left of a frog
                 if (units.get(i) instanceof Enemy) {
@@ -67,11 +67,11 @@ public class Row {
     /**
      * Takes the time and uses the row's speed to determine if it should shift
      *
-     * @param time time in ms since level has started
+     * @param numFrames time in frames since level has started
      * @return true if row should shift
      */
-    public boolean shouldShift(int time) {
-        return false;
+    public boolean shouldShift(int numFrames) {
+        return numFrames % rowSpeed == 0;
     }
 
     @Override
@@ -90,5 +90,38 @@ public class Row {
 
     public void setEnemy(int x) {
         units.set(x, new Enemy(x));
+    }
+
+    public void moveFrogLeftRight(int lr, int frogIndex) throws IllegalArgumentException, ArrayIndexOutOfBoundsException {
+        if (!(units.get(frogIndex) instanceof Player)) {
+            throw new IllegalArgumentException("Index given not instance of Player");
+        }
+        // left
+        if (lr == 3) {
+            units.add(frogIndex-1,units.remove(frogIndex));
+        }
+        // right
+        if (lr == 4) {
+            units.add(frogIndex,units.remove(frogIndex+1));
+        }
+        // error
+        if (lr < 3 || lr > 4) {
+            throw new IllegalArgumentException("This shouldn't happen");
+        }
+    }
+
+    // Checks if a given x coordinate in a row contains an enemy
+    public boolean hasEnemy(int x) {
+        return units.get(x) instanceof Enemy;
+    }
+
+    //nReplaces the frog unit in a given row with ground
+    public void frogLeaves(int x) {
+        units.set(x, new Ground(x));
+    }
+
+    // Replaces the ground unit in a given row with a frog
+    public void frogAppears(int x) {
+        units.set(x, new Player(x,0,0));
     }
 }

@@ -15,9 +15,12 @@ public class Board {
     // Informs rows when to shift. Increased every time boardShift/nextBoard is called
     private int numFrames;
 
+    private int frogCurrentRow = 0;
+    private int frogXIndex = 24;
+
     public Board() {
         this.rows = new ArrayList<>();
-        this.frog = new Player(0, 20, 0);
+        this.frog = new Player(frogCurrentRow, frogXIndex, 0);
         this.startingTime = -1;
         numFrames = 0;
     }
@@ -38,17 +41,23 @@ public class Board {
      * to see if the player should shift. Then shifts board.
      *
      * @param frogShift determines which direction the frog should move
+     *                  0 = none
+     *                  1 = up
+     *                  2 = down
+     *                  3 = left
+     *                  4 = right
      * @return true if any part of board shifts, false if it doesn't
      */
     public boolean boardShift(int frogShift) throws Exception {
         numFrames++;
-        // TODO: Move frog to new row. This can happen purely on Board.java class level
-        // TODO: Calculate shifting rows. This stage could handle collision
+        // If there is a move code
+        if (frogShift > 0 && frogShift < 5) {
+            moveFrog(frogShift);
+        }
+
         for (Row r : rows) {
             r.rowShift(numFrames);
         }
-        // Alternatively check for collision using x coordinates of row (I would prefer not to do this)
-        // -Christian
         return false;
     }
     // PROPOSED NAME CHANGE: change boardShift to nextBoard
@@ -94,7 +103,36 @@ public class Board {
     }
 
     // Methods for testing purposes
-    public void setFrog(int x, int y) {
+    public void setFrog() {
+        rows.get(frogCurrentRow).frogAppears(frogXIndex);
+    }
 
+    public void moveFrog(int moveCode) throws Exception, ArrayIndexOutOfBoundsException {
+        if (moveCode < 0 || moveCode > 4) {
+            throw new IllegalArgumentException("Move codes should be within 0 and 4");
+        }
+        if (moveCode == 1) {
+            if (rows.get(frogCurrentRow+1).hasEnemy(frogXIndex)) {
+                throw new Exception("Enemy collision detected.");
+            } else {
+                rows.get(frogCurrentRow).frogLeaves(frogXIndex);
+                rows.get(frogCurrentRow+1).frogAppears(frogXIndex);
+            }
+            frogCurrentRow++;
+        } else if (moveCode == 2) {
+            if (rows.get(frogCurrentRow-1).hasEnemy(frogXIndex)) {
+                throw new Exception("Enemy collision detected.");
+            } else {
+                rows.get(frogCurrentRow).frogLeaves(frogXIndex);
+                rows.get(frogCurrentRow+1).frogAppears(frogXIndex);
+            }
+            frogCurrentRow--;
+        } else {
+            rows.get(frogCurrentRow).moveFrogLeftRight(moveCode, frogXIndex);
+            if (moveCode == 3)
+                frogXIndex--;
+            if (moveCode == 4)
+                frogXIndex++;
+        }
     }
 }
