@@ -19,6 +19,7 @@ public class ChristiansTests {
         Board b = new Board();
         b.buildBoard();
         b.drawBoard();
+        b.clearBoard();
         // Testing shifting rows
         for (int i = 0; i < 3; i++) {
             System.out.println();
@@ -29,6 +30,7 @@ public class ChristiansTests {
                 break;
             }
             b.drawBoard();
+            b.clearBoard();
         }
         System.out.println();
         System.out.println();
@@ -48,12 +50,14 @@ public class ChristiansTests {
         b2.buildBoard();
         b2.setFrog();
         b2.drawBoard();
+        b2.clearBoard();
         try {
             b2.boardShift(1);
         } catch (Exception e) {
             e.printStackTrace();
         }
         b2.drawBoard();
+        b2.clearBoard();
 
     }
 }

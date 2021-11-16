@@ -97,6 +97,7 @@ public class Board {
         // TODO: figure out if clearing console in IntelliJ is possible.
         // If not find a terminal emulator that supports it.
         // -Christian
+        System.out.println("\003[H\003[2J");
     }
 
     /**
@@ -116,17 +117,26 @@ public class Board {
     }
 
     public void moveFrog(int moveCode) throws Exception, ArrayIndexOutOfBoundsException {
+
         if (moveCode < 0 || moveCode > 4) {
             throw new IllegalArgumentException("Move codes should be within 0 and 4");
         }
+
         if (moveCode == 1) {
-            if (rows.get(frogCurrentRow+1).hasEnemy(frogXIndex)) {
-                throw new Exception("Enemy collision detected.");
+            // Makes sure that the frog does not move up if it is in the top row.
+            // If the frog is in the top row and the move code is received, it will call completeBoard()
+            if (frogCurrentRow < numRows) {
+                if (rows.get(frogCurrentRow + 1).hasEnemy(frogXIndex)) {
+                    throw new Exception("Enemy collision detected.");
+                } else {
+                    rows.get(frogCurrentRow).frogLeaves(frogXIndex);
+                    rows.get(frogCurrentRow + 1).frogAppears(frogXIndex);
+                }
+                frogCurrentRow++;
             } else {
-                rows.get(frogCurrentRow).frogLeaves(frogXIndex);
-                rows.get(frogCurrentRow+1).frogAppears(frogXIndex);
+                completeBoard();
             }
-            frogCurrentRow++;
+
         } else if (moveCode == 2) {
             //Makes sure that the frog does not move down if it is on the bottom row
             if(frogCurrentRow != 0) {
@@ -138,6 +148,7 @@ public class Board {
                 }
                 frogCurrentRow--;
             }
+
         } else {
             rows.get(frogCurrentRow).moveFrogLeftRight(moveCode, frogXIndex);
             if (moveCode == 3 && frogXIndex != 0)
