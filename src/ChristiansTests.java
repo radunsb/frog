@@ -60,9 +60,8 @@ public class ChristiansTests {
 //        b2.clearBoard();
 
 
-        Board b = new Board();
+        Board b = new Board(24,2);
         b.buildBoard();
-        b.setFrog();
         b.drawBoard();
         boolean hasCollided = false;
         long time = System.currentTimeMillis();
@@ -102,5 +101,6 @@ public class ChristiansTests {
 
         }
         b.drawBoard();
+        System.out.println(b.getNumFrames());
     }
 }

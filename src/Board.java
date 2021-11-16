@@ -36,10 +36,22 @@ public class Board {
      */
     public void buildBoard() {
         // Rowspeed hard coded to 1
-        // Enemies hard coded to the number row
+        // Enemies hard coded to the number of the row
         for (int i = 0; i < numRows; i++) {
             rows.add(new Row(1, i, rowSize));
         }
+        // Checks to make sure there is not an enemy in the spot to spawn the frog
+        while ((rows.get(frogCurrentRow).hasEnemy(frogXIndex))) {
+            System.out.println("This loop be running");
+            try {
+                rows.get(frogCurrentRow).rowShift(numFrames);
+            } catch (Exception e) {
+                System.out.println("It is literally impossible for this error to be thrown. " +
+                        "If this happens I will be very surprised");
+            }
+        }
+        // Spawn frog
+        setFrog();
     }
 
     /**
@@ -91,6 +103,10 @@ public class Board {
      */
     public void completeBoard() {
 
+    }
+
+    public int getNumFrames() {
+        return numFrames;
     }
 
     // Methods for testing purposes
