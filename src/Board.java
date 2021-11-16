@@ -22,7 +22,7 @@ public class Board {
 
     public Board() {
         this.rows = new ArrayList<>();
-        this.frog = new Player(frogCurrentRow, frogXIndex, 0);
+        this.frog = new Player();
         this.startingTime = -1;
         numFrames = 0;
         this.frogCurrentRow = 0;

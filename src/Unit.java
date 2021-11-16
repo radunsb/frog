@@ -7,5 +7,5 @@ public abstract class Unit {
         return getSprite();
     }
 
-    public abstract String getSprite();
+    abstract String getSprite();
 }

@@ -19,12 +19,12 @@ public class Row {
         this.rowSize = rowSize;
         // Initializes row with all ground units
         for (int i = 0; i < rowSize; i++) {
-            units.add(new Ground(i));
+            units.add(new Ground());
         }
         // Initializes enemies
         for (int i = 0; i < numEnemies; i++) {
             int rando = (int) Math.floor(rowSize*Math.random());
-            units.set(rando, new Enemy(rando));
+            units.set(rando, new Enemy());
         }
     }
 
@@ -86,11 +86,11 @@ public class Row {
 
     // Methods for testing purposes
     public void setFrog(int x) {
-        units.set(x, new Player(0,0,0));
+        units.set(x, new Player());
     }
 
     public void setEnemy(int x) {
-        units.set(x, new Enemy(x));
+        units.set(x, new Enemy());
     }
 
     public void moveFrogLeftRight(int lr, int frogIndex) throws IllegalArgumentException, ArrayIndexOutOfBoundsException {
@@ -118,11 +118,11 @@ public class Row {
 
     //nReplaces the frog unit in a given row with ground
     public void frogLeaves(int x) {
-        units.set(x, new Ground(x));
+        units.set(x, new Ground());
     }
 
     // Replaces the ground unit in a given row with a frog
     public void frogAppears(int x) {
-        units.set(x, new Player(x,0,0));
+        units.set(x, new Player());
     }
 }
