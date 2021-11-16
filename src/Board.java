@@ -144,7 +144,7 @@ public class Board {
                     throw new Exception("Enemy collision detected.");
                 } else {
                     rows.get(frogCurrentRow).frogLeaves(frogXIndex);
-                    rows.get(frogCurrentRow + 1).frogAppears(frogXIndex);
+                    rows.get(frogCurrentRow - 1).frogAppears(frogXIndex);
                 }
                 frogCurrentRow--;
             }

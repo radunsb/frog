@@ -16,24 +16,24 @@ public class ChristiansTests {
 
 
         // Testing initializing a board. Hardcoded difficulty values in their respective classes
-        Board b = new Board();
-        b.buildBoard();
-        b.drawBoard();
-        b.clearBoard();
-        // Testing shifting rows
-        for (int i = 0; i < 3; i++) {
-            System.out.println();
-            try {
-                b.boardShift(0);
-            } catch (Exception e) {
-                System.out.println(e);
-                break;
-            }
-            b.drawBoard();
-            b.clearBoard();
-        }
-        System.out.println();
-        System.out.println();
+//        Board b = new Board();
+//        b.buildBoard();
+//        b.drawBoard();
+//        b.clearBoard();
+//        // Testing shifting rows
+//        for (int i = 0; i < 3; i++) {
+//            System.out.println();
+//            try {
+//                b.boardShift(0);
+//            } catch (Exception e) {
+//                System.out.println(e);
+//                break;
+//            }
+//            b.drawBoard();
+//            b.clearBoard();
+//        }
+//        System.out.println();
+//        System.out.println();
 
 //        Row r = new Row(1,0);
 //        r.setEnemy(5);
@@ -46,18 +46,61 @@ public class ChristiansTests {
 //            System.out.println(e);
 //        }
 
-        Board b2 = new Board();
-        b2.buildBoard();
-        b2.setFrog();
-        b2.drawBoard();
-        b2.clearBoard();
-        try {
-            b2.boardShift(1);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        b2.drawBoard();
-        b2.clearBoard();
+//        Board b2 = new Board();
+//        b2.buildBoard();
+//        b2.setFrog();
+//        b2.drawBoard();
+//        b2.clearBoard();
+//        try {
+//            b2.boardShift(1);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        b2.drawBoard();
+//        b2.clearBoard();
 
+
+        Board b = new Board();
+        b.buildBoard();
+        b.setFrog();
+        b.drawBoard();
+        boolean hasCollided = false;
+        long time = System.currentTimeMillis();
+        while(!hasCollided){
+            long time2 = System.currentTimeMillis() - time;
+            // Look for movement
+            if(time2 > 1000) {
+                try {
+                    int dir = (int) (Math.random()*5);
+                    switch (dir) {
+                        case 0:
+                            System.out.println("No movement");
+                            break;
+                        case 1:
+                            System.out.println("Up");
+                            break;
+                        case 2:
+                            System.out.println("Down");
+                            break;
+                        case 3:
+                            System.out.println("Left");
+                            break;
+                        case 4:
+                            System.out.println("Right");
+                            break;
+                    }
+                    b.boardShift(dir);
+                } catch (Exception e) {
+                    System.out.println(e);
+                    hasCollided = true;
+                    break;
+                }
+
+                b.drawBoard();
+                time = System.currentTimeMillis();
+            }
+
+        }
+        b.drawBoard();
     }
 }
