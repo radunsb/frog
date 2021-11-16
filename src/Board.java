@@ -25,6 +25,8 @@ public class Board {
         this.frog = new Player(frogCurrentRow, frogXIndex, 0);
         this.startingTime = -1;
         numFrames = 0;
+        this.frogCurrentRow = 0;
+        this.frogXIndex = 24;
     }
 
     /**
@@ -126,18 +128,21 @@ public class Board {
             }
             frogCurrentRow++;
         } else if (moveCode == 2) {
-            if (rows.get(frogCurrentRow-1).hasEnemy(frogXIndex)) {
-                throw new Exception("Enemy collision detected.");
-            } else {
-                rows.get(frogCurrentRow).frogLeaves(frogXIndex);
-                rows.get(frogCurrentRow+1).frogAppears(frogXIndex);
+            //Makes sure that the frog does not move down if it is on the bottom row
+            if(frogCurrentRow != 0) {
+                if (rows.get(frogCurrentRow - 1).hasEnemy(frogXIndex)) {
+                    throw new Exception("Enemy collision detected.");
+                } else {
+                    rows.get(frogCurrentRow).frogLeaves(frogXIndex);
+                    rows.get(frogCurrentRow + 1).frogAppears(frogXIndex);
+                }
+                frogCurrentRow--;
             }
-            frogCurrentRow--;
         } else {
             rows.get(frogCurrentRow).moveFrogLeftRight(moveCode, frogXIndex);
-            if (moveCode == 3)
+            if (moveCode == 3 && frogXIndex != 0)
                 frogXIndex--;
-            if (moveCode == 4)
+            if (moveCode == 4 && frogXIndex < 48)
                 frogXIndex++;
         }
     }
