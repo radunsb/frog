@@ -6,27 +6,29 @@ import java.util.LinkedList;
 public class Board {
     //List of the rows in the current board from top (goal) to bottom (start)
     private ArrayList<Row> rows;
-    //Player Unit
-    private Player frog;
     //Height of board/number of rows
     final int numRows = 10;
-    //Provides starting time in which board is built
-    private int startingTime;
     // Informs rows when to shift. Increased every time boardShift/nextBoard is called
     private int numFrames;
-
+    // Width of each row
     private final int rowSize = 48;
+    // Stores which row the frog is in (updated when frog is moved)
+    private int frogCurrentRow;
+    // Stores the x coordinate of the frog (updated when frog is moved)
+    private int frogXIndex;
 
-    private int frogCurrentRow = 0;
-    private int frogXIndex = 24;
+    public Board(int frogInitX, int frogInitY) {
+        this.rows = new ArrayList<>();
+        numFrames = 0;
+        frogXIndex = frogInitX;
+        frogCurrentRow = frogInitY;
+    }
 
     public Board() {
         this.rows = new ArrayList<>();
-        this.frog = new Player();
-        this.startingTime = -1;
         numFrames = 0;
-        this.frogCurrentRow = 0;
-        this.frogXIndex = 24;
+        frogXIndex = 24;
+        frogCurrentRow = 0;
     }
 
     /**
@@ -64,20 +66,6 @@ public class Board {
         }
         return false;
     }
-    // PROPOSED NAME CHANGE: change boardShift to nextBoard
-
-    /**
-     * called every time the board shifts to see if a collision is occurring within the row
-     * the frog is currently in
-     *
-     * @param currentRow current row the frog is in
-     * @return if the frog is currently in the same spot as an enemy object
-     */
-    public boolean checkCollisionRow(int currentRow) {
-        return false;
-    }
-
-
 
     /**
      * Draws the board inside the console each time it shifts
@@ -87,23 +75,21 @@ public class Board {
         for (int i = numRows - 1; i >= 0; i--) {
             sb.append(rows.get(i).toString() + "\n");
         }
-        System.out.print(sb.toString());
+        System.out.print(sb);
     }
 
     /**
      * Clears the board each time it shifts
      */
     public void clearBoard() {
-        // TODO: figure out if clearing console in IntelliJ is possible.
-        // If not find a terminal emulator that supports it.
-        // -Christian
+        // In terminal emulator Alacritty this code works.
         System.out.println("\003[H\003[2J");
     }
 
     /**
      *  Resets the frog's position and changes to the next level
      */
-    public void completeBoard(){
+    public void completeBoard() {
 
     }
 

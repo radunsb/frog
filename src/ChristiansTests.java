@@ -69,7 +69,7 @@ public class ChristiansTests {
         while(!hasCollided){
             long time2 = System.currentTimeMillis() - time;
             // Look for movement
-            if(time2 > 1000) {
+            if(time2 > 250) {
                 try {
                     int dir = (int) (Math.random()*5);
                     switch (dir) {
