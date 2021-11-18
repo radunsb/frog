@@ -17,6 +17,16 @@ public class Board {
     // Stores the x coordinate of the frog (updated when frog is moved)
     private int frogXIndex;
 
+    public Board(boolean randomizeRowSpeed) {
+        this.rows = new ArrayList<>();
+        numFrames = 0;
+        frogXIndex = 24;
+        frogCurrentRow = 0;
+        if (randomizeRowSpeed) {
+            buildBoard(true);
+        }
+    }
+
     public Board(int frogInitX, int frogInitY) {
         this.rows = new ArrayList<>();
         numFrames = 0;
@@ -39,6 +49,26 @@ public class Board {
         // Enemies hard coded to the number of the row
         for (int i = 0; i < numRows; i++) {
             rows.add(new Row(1, i, rowSize));
+        }
+        // Checks to make sure there is not an enemy in the spot to spawn the frog
+        while ((rows.get(frogCurrentRow).hasEnemy(frogXIndex))) {
+            System.out.println("This loop be running");
+            try {
+                rows.get(frogCurrentRow).rowShift(numFrames);
+            } catch (Exception e) {
+                System.out.println("It is literally impossible for this error to be thrown. " +
+                        "If this happens I will be very surprised");
+            }
+        }
+        // Spawn frog
+        setFrog();
+    }
+
+    public void buildBoard(boolean randomizeRowSpeed) {
+        // Rowspeed hard coded to 1
+        // Enemies hard coded to the number of the row
+        for (int i = 0; i < numRows; i++) {
+            rows.add(new Row(((int)(Math.random()*4)+1), i, rowSize));
         }
         // Checks to make sure there is not an enemy in the spot to spawn the frog
         while ((rows.get(frogCurrentRow).hasEnemy(frogXIndex))) {

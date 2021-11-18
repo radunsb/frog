@@ -100,7 +100,6 @@ public class ChristiansTests {
             }
 
         }
-        b.drawBoard();
         System.out.println(b.getNumFrames());
     }
 }
