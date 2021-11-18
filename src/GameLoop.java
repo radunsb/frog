@@ -9,6 +9,7 @@ public class GameLoop implements KeyListener {
 
     private int score;
 
+    private int frogDirection;
     /**
      * Big queue of the number of enemies hard-coded in. Basically has the numbers for every level
      * and continues through until the game is completed.
@@ -17,7 +18,8 @@ public class GameLoop implements KeyListener {
     private PriorityQueue<ArrayList<Integer>> numEnemies = new PriorityQueue<>();
 
     public GameLoop() {
-
+        this.frogDirection = frogDirection;
+        this.score = score;
     }
 
     /**
@@ -55,12 +57,29 @@ public class GameLoop implements KeyListener {
      *
      * @return direction frog should move
      */
-    public int frogMove() {
-        return -1;
+    public int getFrogDirection(){
+        return this.frogDirection;
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
+        switch(e.getKeyCode()) {
+            case KeyEvent.VK_LEFT:
+                frogDirection = 3;
+                break;
+            case KeyEvent.VK_UP:
+                frogDirection = 1;
+                break;
+            case KeyEvent.VK_RIGHT:
+                frogDirection = 4;
+                break;
+            case KeyEvent.VK_DOWN:
+                frogDirection = 2;
+                break;
+            default:
+                frogDirection = 0;
+                break;
+        }
 
     }
 

@@ -90,6 +90,14 @@ public class Board {
         System.out.print(sb);
     }
 
+    public String drawBoardString(){
+        StringBuilder sb = new StringBuilder();
+        for (int i = numRows - 1; i >= 0; i--) {
+            sb.append(rows.get(i).toString() + "\n");
+        }
+        return sb.toString();
+    }
+
     /**
      * Clears the board each time it shifts
      */
