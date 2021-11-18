@@ -8,15 +8,17 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 public class BenTests extends JPanel implements KeyListener{
-    int frogD = 0;
+    static int frogD = 0;
     public BenTests(){
         addKeyListener(this);
 
     }
     public static void main(String[] args){
+        BenTests mainObject = new BenTests();
         GameLoop g = new GameLoop();
         Board b = new Board();
         JFrame frame = new JFrame("Frogger");
+        frame.addKeyListener(mainObject);
         frame.pack();
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,14 +35,13 @@ public class BenTests extends JPanel implements KeyListener{
             long time2 = System.currentTimeMillis() - time;
             // Look for movement
             if(time2 > 1000) {
-                int movement = g.getFrogDirection();
                 try {
-                    b.boardShift(movement);
+                    b.boardShift(frogD);
                 } catch (Exception e) {
                     hasCollided = true;
                     break;
                 }
-
+                frogD = 0;
                 label.setText(b.drawBoardString());
                 time = System.currentTimeMillis();
             }
