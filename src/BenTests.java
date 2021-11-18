@@ -23,6 +23,8 @@ public class BenTests extends JPanel implements KeyListener{
         frame.setSize(800, 800);
         b.buildBoard();
         JTextArea label = new JTextArea(b.drawBoardString());
+        Font textFont = new Font("Serif", Font.PLAIN, 30);
+        label.setFont(textFont);
         frame.add(label);
         b.drawBoard();
         boolean hasCollided = false;
