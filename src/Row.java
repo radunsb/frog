@@ -24,21 +24,13 @@ public class Row {
         // Initializes enemies
         for (int i = 0; i < numEnemies; i++) {
             int rando = (int) Math.floor(rowSize*Math.random());
-            units.set(rando, new Enemy());
+            setEnemy(rando);
         }
     }
 
     /**
-     * Takes numEnemies and assigns that number of enemies to random positions in the row,
-     * and the rest of the units to ground
-     * @param numEnemies number of enemies per row, taken from queue in GameLoop
-     */
-    public void fillRow(int numEnemies) {
-        // (Bad) implementation in constructor
-        // -Christian
-    }
-
-    /**
+     *
+     * @param numFrames Number of frames processed by Board class
      * Moves every unit in row one to right, and the furthest one to the first position
      */
     public void rowShift(int numFrames) throws Exception {
@@ -59,10 +51,9 @@ public class Row {
             }
             units.add(0, units.remove(rowSize-1));
         }
-        // rowSpeed explanation time!!! if rowspeed is set to 4, it will shift every 4 frames
+        // if rowspeed is set to 4, it will shift every 4 frames
         // if it is set to 1, every frame
         // if it is set to 20, once every 20 frames
-        // Hope this makes sense
     }
 
     /**

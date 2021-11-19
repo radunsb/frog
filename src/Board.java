@@ -1,7 +1,6 @@
 package src;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class Board {
     //List of the rows in the current board from top (goal) to bottom (start)
@@ -16,16 +15,6 @@ public class Board {
     private int frogCurrentRow;
     // Stores the x coordinate of the frog (updated when frog is moved)
     private int frogXIndex;
-
-    public Board(boolean randomizeRowSpeed) {
-        this.rows = new ArrayList<>();
-        numFrames = 0;
-        frogXIndex = 24;
-        frogCurrentRow = 0;
-        if (randomizeRowSpeed) {
-            buildBoard(true);
-        }
-    }
 
     public Board(int frogInitX, int frogInitY) {
         this.rows = new ArrayList<>();
@@ -72,26 +61,6 @@ public class Board {
         setFrog();
     }
 
-    public void buildBoard(boolean randomizeRowSpeed) {
-        // Rowspeed hard coded to 1
-        // Enemies hard coded to the number of the row
-        for (int i = 0; i < numRows; i++) {
-            rows.add(new Row(((int)(Math.random()*4)+1), i, rowSize));
-        }
-        // Checks to make sure there is not an enemy in the spot to spawn the frog
-        while ((rows.get(frogCurrentRow).hasEnemy(frogXIndex))) {
-            System.out.println("This loop be running");
-            try {
-                rows.get(frogCurrentRow).rowShift(numFrames);
-            } catch (Exception e) {
-                System.out.println("It is literally impossible for this error to be thrown. " +
-                        "If this happens I will be very surprised");
-            }
-        }
-        // Spawn frog
-        setFrog();
-    }
-
     /**
      *
      * @param emptyRowCoef [range: 0.0 - 1.0] is the probability that a given row will be initialized empty
@@ -111,7 +80,7 @@ public class Board {
                 throw new IllegalArgumentException("ERROR: input out of range 1 - 10");
             }
         }
-        int rowSpeedRange = (int) (Math.sqrt( (double) (20 / rowSpeedCoef))) + 1;
+        int rowSpeedRange = (int) (Math.sqrt( (20.0 / rowSpeedCoef))) + 1;
         int sNumEnemies = (numEnemiesCoef / 3) + 4;
         int gNumEnemies = (numEnemiesCoef * 3) - 4;
         for (int i = 0; i < numRows; i++) {
@@ -168,25 +137,35 @@ public class Board {
     public void drawBoard() {
         StringBuilder sb = new StringBuilder();
         for (int i = numRows - 1; i >= 0; i--) {
-            sb.append(rows.get(i).toString() + "\n");
+            sb.append(rows.get(i).toString());
+            sb.append("\n");
         }
         System.out.print(sb);
     }
 
+    // Will probably need to be removed
     public String drawBoardString(){
         StringBuilder sb = new StringBuilder();
         for (int i = numRows - 1; i >= 0; i--) {
-            sb.append(rows.get(i).toString() + "\n");
+            sb.append(rows.get(i).toString());
+            sb.append("\n");
         }
         return sb.toString();
     }
 
     /**
-     * Clears the board each time it shifts
+     *
+     * @return The string representing the board object
+     * makes it easy to print without a redundant method call [ print(Board) v. print(Board.drawBoardString()) ]
      */
-    public void clearBoard() {
-        // In terminal emulator Alacritty this code works.
-        System.out.println("\003[H\003[2J");
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = numRows - 1; i >= 0; i--) {
+            sb.append(rows.get(i).toString());
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 
     /**
@@ -196,6 +175,9 @@ public class Board {
 
     }
 
+    /**
+     * @return number of frames that have been processed so far
+     */
     public int getNumFrames() {
         return numFrames;
     }
@@ -209,7 +191,7 @@ public class Board {
         rows.get(row).frogAppears(frogXIndex);
     }
 
-    public void moveFrog(int moveCode) throws Exception, ArrayIndexOutOfBoundsException {
+    public void moveFrog(int moveCode) throws Exception {
 
         if (moveCode < 0 || moveCode > 4) {
             throw new IllegalArgumentException("Move codes should be within 0 and 4");
