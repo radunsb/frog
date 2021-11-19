@@ -100,6 +100,17 @@ public class Board {
      * @param numEnemiesCoef [range: 1 - 10] corresponds with the average number of enemies in the row (lower is less enemies)
      */
     public void buildBoard(double emptyRowCoef, int rowSpeedCoef, int numEnemiesCoef) {
+        { // Input checks
+            if (emptyRowCoef < 0.0 || emptyRowCoef > 1.0) {
+                throw new IllegalArgumentException("ERROR: input out of range 0.0 - 1.0");
+            }
+            if (rowSpeedCoef < 1 || rowSpeedCoef > 10) {
+                throw new IllegalArgumentException("ERROR: input out of range 1 - 10");
+            }
+            if (numEnemiesCoef < 1 || numEnemiesCoef > 10) {
+                throw new IllegalArgumentException("ERROR: input out of range 1 - 10");
+            }
+        }
         int rowSpeedRange = (int) (Math.sqrt( (double) (20 / rowSpeedCoef))) + 1;
         int sNumEnemies = (numEnemiesCoef / 3) + 4;
         int gNumEnemies = (numEnemiesCoef * 3) - 4;

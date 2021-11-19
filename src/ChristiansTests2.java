@@ -25,7 +25,7 @@ public class ChristiansTests2 extends JPanel implements KeyListener{
         frame.pack();
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 800);
+        frame.setSize(800, 600);
         JTextArea label = new JTextArea(b.drawBoardString());
         Font textFont = new Font("Serif", Font.PLAIN, 30);
         label.setFont(textFont);
