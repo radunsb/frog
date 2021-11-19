@@ -19,6 +19,8 @@ public class ChristiansTests2 extends JPanel implements KeyListener{
         GameLoop g = new GameLoop();
         Board b = new Board(true);
         JFrame frame = new JFrame("Frogger");
+        Color bg = new Color(30,30,32);
+        Color fg = new Color(100,210,100);
         frame.addKeyListener(mainObject);
         frame.pack();
         frame.setVisible(true);
@@ -27,6 +29,8 @@ public class ChristiansTests2 extends JPanel implements KeyListener{
         JTextArea label = new JTextArea(b.drawBoardString());
         Font textFont = new Font("Serif", Font.PLAIN, 30);
         label.setFont(textFont);
+        label.setForeground(fg);
+        label.setBackground(bg);
         frame.add(label);
         b.drawBoard();
         boolean hasCollided = false;
