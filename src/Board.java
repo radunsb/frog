@@ -6,21 +6,23 @@ public class Board {
     //List of the rows in the current board from top (goal) to bottom (start)
     private ArrayList<Row> rows;
     //Height of board/number of rows
-    final int numRows = 10;
+    private int numRows = 10;
     // Informs rows when to shift. Increased every time boardShift/nextBoard is called
     private int numFrames;
     // Width of each row
-    private final int rowSize = 48;
+    private int rowSize = 48;
     // Stores which row the frog is in (updated when frog is moved)
     private int frogCurrentRow;
     // Stores the x coordinate of the frog (updated when frog is moved)
     private int frogXIndex;
 
-    public Board(int frogInitX, int frogInitY) {
+    public Board(int boardWidth, int boardHeight) {
         this.rows = new ArrayList<>();
+        numRows = boardHeight;
+        rowSize = boardWidth;
         numFrames = 0;
-        frogXIndex = frogInitX;
-        frogCurrentRow = frogInitY;
+        frogXIndex = boardWidth / 2;
+        frogCurrentRow = 0;
     }
 
     public Board() {

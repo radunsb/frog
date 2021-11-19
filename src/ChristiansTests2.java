@@ -16,18 +16,18 @@ public class ChristiansTests2 extends JPanel implements KeyListener{
     }
     public static void main(String[] args){
         ChristiansTests2 mainObject = new ChristiansTests2();
-        GameLoop g = new GameLoop();
-        Board b = new Board(0.2,4,4);
+        Board b = new Board(40,17);
+        b.buildBoard(0.2,2,2);
         JFrame frame = new JFrame("Frogger");
         Color bg = new Color(30,30,32);
-        Color fg = new Color(100,210,100);
+        Color fg = new Color(200,120,100);
         frame.addKeyListener(mainObject);
         frame.pack();
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
+        frame.setSize(840, 600);
         JTextArea label = new JTextArea(b.drawBoardString());
-        Font textFont = new Font("Serif", Font.PLAIN, 30);
+        Font textFont = new Font(Font.MONOSPACED, Font.PLAIN, 24);
         label.setFont(textFont);
         label.setForeground(fg);
         label.setBackground(bg);
@@ -62,22 +62,12 @@ public class ChristiansTests2 extends JPanel implements KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-        switch(e.getKeyCode()) {
-            case KeyEvent.VK_LEFT:
-                frogD = 3;
-                break;
-            case KeyEvent.VK_UP:
-                frogD = 1;
-                break;
-            case KeyEvent.VK_RIGHT:
-                frogD = 4;
-                break;
-            case KeyEvent.VK_DOWN:
-                frogD = 2;
-                break;
-            default:
-                frogD = 0;
-                break;
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_LEFT -> frogD = 3;
+            case KeyEvent.VK_UP -> frogD = 1;
+            case KeyEvent.VK_RIGHT -> frogD = 4;
+            case KeyEvent.VK_DOWN -> frogD = 2;
+            default -> frogD = 0;
         }
     }
 
