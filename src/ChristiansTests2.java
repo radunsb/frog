@@ -17,7 +17,7 @@ public class ChristiansTests2 extends JPanel implements KeyListener{
     public static void main(String[] args){
         ChristiansTests2 mainObject = new ChristiansTests2();
         GameLoop g = new GameLoop();
-        Board b = new Board(true);
+        Board b = new Board(0.2,4,4);
         JFrame frame = new JFrame("Frogger");
         Color bg = new Color(30,30,32);
         Color fg = new Color(100,210,100);

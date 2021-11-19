@@ -41,6 +41,14 @@ public class Board {
         frogCurrentRow = 0;
     }
 
+    public Board(double emptyRowCoef, int rowSpeedCoef, int numEnemiesCoef) {
+        this.rows = new ArrayList<>();
+        numFrames = 0;
+        frogXIndex = 24;
+        frogCurrentRow = 0;
+        buildBoard(emptyRowCoef, rowSpeedCoef, numEnemiesCoef);
+    }
+
     /**
      * constructs Rows for the number of rows in the board
      */
@@ -69,6 +77,40 @@ public class Board {
         // Enemies hard coded to the number of the row
         for (int i = 0; i < numRows; i++) {
             rows.add(new Row(((int)(Math.random()*4)+1), i, rowSize));
+        }
+        // Checks to make sure there is not an enemy in the spot to spawn the frog
+        while ((rows.get(frogCurrentRow).hasEnemy(frogXIndex))) {
+            System.out.println("This loop be running");
+            try {
+                rows.get(frogCurrentRow).rowShift(numFrames);
+            } catch (Exception e) {
+                System.out.println("It is literally impossible for this error to be thrown. " +
+                        "If this happens I will be very surprised");
+            }
+        }
+        // Spawn frog
+        setFrog();
+    }
+
+    /**
+     *
+     * @param emptyRowCoef [range: 0.0 - 1.0] is the probability that a given row will be initialized empty
+     *                     (like a patch of grass in frogger)
+     * @param rowSpeedCoef [range: 1 - 10] corresponds with the average speed of the rows (lower numbers are slower)
+     * @param numEnemiesCoef [range: 1 - 10] corresponds with the average number of enemies in the row (lower is less enemies)
+     */
+    public void buildBoard(double emptyRowCoef, int rowSpeedCoef, int numEnemiesCoef) {
+        int rowSpeedRange = (int) (Math.sqrt( (double) (20 / rowSpeedCoef))) + 1;
+        int sNumEnemies = (numEnemiesCoef / 3) + 4;
+        int gNumEnemies = (numEnemiesCoef * 3) - 4;
+        for (int i = 0; i < numRows; i++) {
+            if (Math.random() < emptyRowCoef) {
+                rows.add(new Row(1, 0, rowSize));
+            } else {
+                int rowSpeed = (int) (Math.random()*rowSpeedRange) + 1;
+                int numEnemies = (int) ((Math.random()*(gNumEnemies-sNumEnemies))+sNumEnemies) * (i == 0 ? 0 : 1); // Guarantees no enemies spawn in row 0
+                rows.add(new Row(rowSpeed, numEnemies, rowSize));
+            }
         }
         // Checks to make sure there is not an enemy in the spot to spawn the frog
         while ((rows.get(frogCurrentRow).hasEnemy(frogXIndex))) {
