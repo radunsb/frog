@@ -40,6 +40,7 @@ public class Row {
             for (int i = 0; i < rowSize-1; i++) {
                 // Checks if there is an enemy to the left of a frog
                 if (units.get(i) instanceof Enemy) {
+
                     if (units.get(i+1) instanceof Player) {
                         // Throws collision detected error
                         throw new Exception("Collision detected");
@@ -50,6 +51,10 @@ public class Row {
                    containsFrog = true;
                 }
             }
+                if(units.get(rowSize-1) instanceof Enemy && units.get(0) instanceof Player){
+                    //Specific case of character dying from enemies scrolling over
+                    throw new Exception("Collision Detected");
+                }
                 if(units.get(rowSize-1) instanceof Player){
                     units.add(0, units.remove(rowSize-2));
                 }
