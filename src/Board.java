@@ -53,7 +53,7 @@ public class Board {
         while ((rows.get(frogCurrentRow).hasEnemy(frogXIndex))) {
             System.out.println("This loop be running");
             try {
-                rows.get(frogCurrentRow).rowShift(numFrames);
+                rows.get(frogCurrentRow).rowShift(numFrames, frogXIndex);
             } catch (Exception e) {
                 System.out.println("It is literally impossible for this error to be thrown. " +
                         "If this happens I will be very surprised");
@@ -98,7 +98,7 @@ public class Board {
         while ((rows.get(frogCurrentRow).hasEnemy(frogXIndex))) {
             System.out.println("This loop be running");
             try {
-                rows.get(frogCurrentRow).rowShift(numFrames);
+                rows.get(frogCurrentRow).rowShift(numFrames, frogXIndex);
             } catch (Exception e) {
                 System.out.println("It is literally impossible for this error to be thrown. " +
                         "If this happens I will be very surprised");
@@ -128,7 +128,8 @@ public class Board {
         }
 
         for (Row r : rows) {
-            r.rowShift(numFrames);
+
+            r.rowShift(numFrames, frogXIndex);
         }
         return false;
     }
@@ -230,7 +231,7 @@ public class Board {
             rows.get(frogCurrentRow).moveFrogLeftRight(moveCode, frogXIndex);
             if (moveCode == 3 && frogXIndex != 0)
                 frogXIndex--;
-            if (moveCode == 4 && frogXIndex < 48)
+            if (moveCode == 4 && frogXIndex < rowSize-1)
                 frogXIndex++;
         }
     }

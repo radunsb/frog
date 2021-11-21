@@ -33,7 +33,8 @@ public class Row {
      * @param numFrames Number of frames processed by Board class
      * Moves every unit in row one to right, and the furthest one to the first position
      */
-    public void rowShift(int numFrames) throws Exception {
+    public void rowShift(int numFrames, int frogX) throws Exception {
+        boolean containsFrog = false;
         // If the current row is set to shift
         if (shouldShift(numFrames)) {
             for (int i = 0; i < rowSize-1; i++) {
@@ -46,10 +47,20 @@ public class Row {
                     // Checks if there is a frog in the current position
                     // If so, move frog to left to compensate for row shift
                 } else if (units.get(i) instanceof Player) {
-                    units.add(i-1, units.remove(i));
+                   containsFrog = true;
                 }
             }
-            units.add(0, units.remove(rowSize-1));
+                if(units.get(rowSize-1) instanceof Player){
+                    units.add(0, units.remove(rowSize-2));
+                }
+                else {
+                    units.add(0, units.remove(rowSize - 1));
+                }
+            if(containsFrog) {
+                if(frogX < rowSize-1) {
+                    units.add(frogX, units.remove(frogX + 1));
+                }
+            }
         }
         // if rowspeed is set to 4, it will shift every 4 frames
         // if it is set to 1, every frame
@@ -89,11 +100,11 @@ public class Row {
             throw new IllegalArgumentException("Index given not instance of Player");
         }
         // left
-        if (lr == 3) {
+        if (lr == 3 && frogIndex != 0) {
             units.add(frogIndex-1,units.remove(frogIndex));
         }
         // right
-        if (lr == 4) {
+        if (lr == 4 && frogIndex < rowSize-1) {
             units.add(frogIndex,units.remove(frogIndex+1));
         }
         // error
