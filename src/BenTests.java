@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+
 public class BenTests extends JPanel implements KeyListener{
     static int frogD = 0;
     public BenTests(){
@@ -16,17 +17,21 @@ public class BenTests extends JPanel implements KeyListener{
     public static void main(String[] args){
         BenTests mainObject = new BenTests();
         GameLoop g = new GameLoop();
-        Board b = new Board();
+        Board b = g.runLevel(5);
+
         JFrame frame = new JFrame("Frogger");
+        Color bg = new Color(30,30,32);
+        Color fg = new Color(200,120,100);
         frame.addKeyListener(mainObject);
         frame.pack();
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 800);
-        b.buildBoard();
+        frame.setSize(840, 600);
         JTextArea label = new JTextArea(b.drawBoardString());
-        Font textFont = new Font("Serif", Font.PLAIN, 30);
+        Font textFont = new Font(Font.MONOSPACED, Font.PLAIN, 24);
         label.setFont(textFont);
+        label.setForeground(fg);
+        label.setBackground(bg);
         frame.add(label);
         b.drawBoard();
         boolean hasCollided = false;
@@ -34,11 +39,17 @@ public class BenTests extends JPanel implements KeyListener{
         while(!hasCollided){
             long time2 = System.currentTimeMillis() - time;
             // Look for movement
-            if(time2 > 1000) {
+            if(time2 > 50) { // 20 frames per second
                 try {
                     b.boardShift(frogD);
                 } catch (Exception e) {
                     hasCollided = true;
+                    label.setText("Game over.");
+                    break;
+                }
+                if(b.completeBoard()){
+                    hasCollided = true;
+                    label.setText("You Win!");
                     break;
                 }
                 frogD = 0;
@@ -57,22 +68,12 @@ public class BenTests extends JPanel implements KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-        switch(e.getKeyCode()) {
-            case KeyEvent.VK_LEFT:
-                frogD = 3;
-                break;
-            case KeyEvent.VK_UP:
-                frogD = 1;
-                break;
-            case KeyEvent.VK_RIGHT:
-                frogD = 4;
-                break;
-            case KeyEvent.VK_DOWN:
-                frogD = 2;
-                break;
-            default:
-                frogD = 0;
-                break;
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_LEFT -> frogD = 3;
+            case KeyEvent.VK_UP -> frogD = 1;
+            case KeyEvent.VK_RIGHT -> frogD = 4;
+            case KeyEvent.VK_DOWN -> frogD = 2;
+            default -> frogD = 0;
         }
     }
 

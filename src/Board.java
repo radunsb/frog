@@ -6,11 +6,11 @@ public class Board {
     //List of the rows in the current board from top (goal) to bottom (start)
     private ArrayList<Row> rows;
     //Height of board/number of rows
-    private int numRows = 10;
+    private int numRows = 17;
     // Informs rows when to shift. Increased every time boardShift/nextBoard is called
     private int numFrames;
     // Width of each row
-    private int rowSize = 48;
+    private int rowSize = 40;
     // Stores which row the frog is in (updated when frog is moved)
     private int frogCurrentRow;
     // Stores the x coordinate of the frog (updated when frog is moved)
@@ -172,10 +172,10 @@ public class Board {
     }
 
     /**
-     *  Resets the frog's position and changes to the next level
+     *  @return if the board is currently completed
      */
-    public void completeBoard() {
-
+    public boolean completeBoard() {
+        return (frogCurrentRow == (numRows-1));
     }
 
     /**

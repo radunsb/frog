@@ -26,7 +26,12 @@ public class GameLoop implements KeyListener {
      * Creates a new level, creating a new board for it and resetting the frog's position
      * @param numLevel current level on
      */
-    public void runLevel(int numLevel) {
+    public Board runLevel(int numLevel) {
+        double emptyRowCoef = 0.02*(10-numLevel);
+        int rowSpeedCoef = numLevel/2;
+        int numEnemiesCoef = numLevel/2;
+        Board b = new Board(emptyRowCoef, rowSpeedCoef, numEnemiesCoef);
+        return b;
 
     }
 
