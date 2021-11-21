@@ -31,6 +31,7 @@ public class Row {
     /**
      *
      * @param numFrames Number of frames processed by Board class
+     * @param frogX Current x position of the frog, FrogXIndex in Board
      * Moves every unit in row one to right, and the furthest one to the first position
      */
     public void rowShift(int numFrames, int frogX) throws Exception {
