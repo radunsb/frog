@@ -16,23 +16,51 @@ public class GameLoop implements KeyListener {
      * Will use iterator to keep track of position in queue
      */
     private PriorityQueue<ArrayList<Integer>> numEnemies = new PriorityQueue<>();
-
+    private int level;
     public GameLoop() {
         this.frogDirection = frogDirection;
         this.score = score;
+        this.level = 1;
+
     }
 
+    public GameLoop(int startingLevel){
+        this.frogDirection = frogDirection;
+        this.score = score;
+        this.level = startingLevel;
+    }
     /**
      * Creates a new level, creating a new board for it and resetting the frog's position
      * @param numLevel current level on
      */
     public Board runLevel(int numLevel) {
         double emptyRowCoef = 0.02*(10-numLevel);
-        int rowSpeedCoef = numLevel/2;
-        int numEnemiesCoef = numLevel/2;
+        int rowSpeedCoef = (numLevel/2) + 1;
+        int numEnemiesCoef = (numLevel/2) + 1;
         Board b = new Board(emptyRowCoef, rowSpeedCoef, numEnemiesCoef);
         return b;
 
+    }
+
+    /**
+     * @return current level
+     */
+    public int getLevel(){
+        return this.level;
+    }
+
+    /**
+     * @param newLevel level to be set to
+     */
+    public void setLevel(int newLevel){
+        this.level = newLevel;
+    }
+
+    /**
+     * @return current score
+     */
+    public int getScore(){
+        return this.score;
     }
 
     /**

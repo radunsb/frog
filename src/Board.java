@@ -83,8 +83,8 @@ public class Board {
             }
         }
         int rowSpeedRange = (int) (Math.sqrt( (20.0 / rowSpeedCoef))) + 1;
-        int sNumEnemies = (numEnemiesCoef / 3) + 4;
-        int gNumEnemies = (numEnemiesCoef * 3) - 4;
+        int sNumEnemies = (numEnemiesCoef / 2) + 4;
+        int gNumEnemies = (numEnemiesCoef * 2) - 4;
         for (int i = 0; i < numRows; i++) {
             if (Math.random() < emptyRowCoef) {
                 rows.add(new Row(1, 0, rowSize));
@@ -147,12 +147,13 @@ public class Board {
     }
 
     // Will probably need to be removed
-    public String drawBoardString(){
+    public String drawBoardString(int level, int score){
         StringBuilder sb = new StringBuilder();
         for (int i = numRows - 1; i >= 0; i--) {
             sb.append(rows.get(i).toString());
             sb.append("\n");
         }
+        sb.append("Level: " + level + "        Score: " + score);
         return sb.toString();
     }
 

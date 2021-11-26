@@ -16,8 +16,8 @@ public class BenTests extends JPanel implements KeyListener{
     }
     public static void main(String[] args){
         BenTests mainObject = new BenTests();
-        GameLoop g = new GameLoop();
-        Board b = g.runLevel(5);
+        GameLoop g = new GameLoop(1);
+        Board b = g.runLevel(g.getLevel());
 
         JFrame frame = new JFrame("Frogger");
         Color bg = new Color(30,30,32);
@@ -26,13 +26,15 @@ public class BenTests extends JPanel implements KeyListener{
         frame.pack();
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(840, 600);
-        JTextArea label = new JTextArea(b.drawBoardString());
+        frame.setSize(840, 680);
+        JTextArea label = new JTextArea(b.drawBoardString(g.getLevel(), g.getScore()));
+
         Font textFont = new Font(Font.MONOSPACED, Font.PLAIN, 24);
         label.setFont(textFont);
         label.setForeground(fg);
         label.setBackground(bg);
         frame.add(label);
+
         b.drawBoard();
         boolean hasCollided = false;
         long time = System.currentTimeMillis();
@@ -48,12 +50,16 @@ public class BenTests extends JPanel implements KeyListener{
                     break;
                 }
                 if(b.completeBoard()){
-                    hasCollided = true;
-                    label.setText("You Win!");
-                    break;
+                    if(g.getLevel() == 5){
+                        label.setText("You Win!");
+                        hasCollided = true;
+                        break;
+                    }
+                   g.setLevel(g.getLevel() + 1);
+                   b = g.runLevel(g.getLevel());
                 }
                 frogD = 0;
-                label.setText(b.drawBoardString());
+                label.setText(b.drawBoardString(g.getLevel(), g.getScore()));
                 time = System.currentTimeMillis();
             }
 

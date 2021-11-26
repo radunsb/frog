@@ -7,7 +7,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-
+/**
 public class ChristiansTests2 extends JPanel implements KeyListener{
     static int frogD = 0;
     public ChristiansTests2(){
@@ -77,4 +77,5 @@ public class ChristiansTests2 extends JPanel implements KeyListener{
     }
 
 
-}
+    }
+ */
