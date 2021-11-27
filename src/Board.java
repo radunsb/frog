@@ -147,13 +147,13 @@ public class Board {
     }
 
     // Will probably need to be removed
-    public String drawBoardString(int level, int score){
+    public String drawBoardString(int level, int score, int lives){
         StringBuilder sb = new StringBuilder();
         for (int i = numRows - 1; i >= 0; i--) {
             sb.append(rows.get(i).toString());
             sb.append("\n");
         }
-        sb.append("Level: " + level + "        Score: " + score);
+        sb.append("Level: " + level + "        Score: " + score + "        Lives: " + lives);
         return sb.toString();
     }
 
@@ -186,11 +186,22 @@ public class Board {
         return numFrames;
     }
 
+    public void setFrogRow(int row){
+        this.frogCurrentRow = row;
+    }
+
+    public void setFrogXIndex(int x){
+        this.frogXIndex = x;
+    }
+
     // Methods for testing purposes
     public void setFrog() {
         rows.get(frogCurrentRow).frogAppears(frogXIndex);
     }
 
+    public void removeFrog(){
+        rows.get(frogCurrentRow).frogLeaves(frogXIndex);
+    }
     public void setFrog(int row){
         rows.get(row).frogAppears(frogXIndex);
     }

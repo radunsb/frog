@@ -27,7 +27,7 @@ public class BenTests extends JPanel implements KeyListener{
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(840, 680);
-        JTextArea label = new JTextArea(b.drawBoardString(g.getLevel(), g.getScore()));
+        JTextArea label = new JTextArea(b.drawBoardString(g.getLevel(), g.getScore(), g.getLives()));
 
         Font textFont = new Font(Font.MONOSPACED, Font.PLAIN, 24);
         label.setFont(textFont);
@@ -45,9 +45,15 @@ public class BenTests extends JPanel implements KeyListener{
                 try {
                     b.boardShift(frogD);
                 } catch (Exception e) {
-                    hasCollided = true;
-                    label.setText("Game over.");
-                    break;
+                    if(g.getLives() > 1){
+                        g.restartLevel(b);
+                        g.setLives(g.getLives() - 1);
+                    }
+                    else {
+                        hasCollided = true;
+                        label.setText("Game over.");
+                        break;
+                    }
                 }
                 if(b.completeBoard()){
                     if(g.getLevel() == 5){
@@ -59,7 +65,7 @@ public class BenTests extends JPanel implements KeyListener{
                    b = g.runLevel(g.getLevel());
                 }
                 frogD = 0;
-                label.setText(b.drawBoardString(g.getLevel(), g.getScore()));
+                label.setText(b.drawBoardString(g.getLevel(), g.getScore(), g.getLives()));
                 time = System.currentTimeMillis();
             }
 

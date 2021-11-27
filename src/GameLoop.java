@@ -17,17 +17,19 @@ public class GameLoop implements KeyListener {
      */
     private PriorityQueue<ArrayList<Integer>> numEnemies = new PriorityQueue<>();
     private int level;
+    private int lives;
     public GameLoop() {
         this.frogDirection = frogDirection;
         this.score = score;
         this.level = 1;
-
+        this.lives = 3;
     }
 
     public GameLoop(int startingLevel){
         this.frogDirection = frogDirection;
         this.score = score;
         this.level = startingLevel;
+        this.lives = 3;
     }
     /**
      * Creates a new level, creating a new board for it and resetting the frog's position
@@ -63,12 +65,21 @@ public class GameLoop implements KeyListener {
         return this.score;
     }
 
+    public int getLives() { return this.lives; }
+
+    public void setLives(int newLives){
+        this.lives = newLives;
+    }
+
     /**
      * Same as runLevel but is called when the frog dies to restart the current level
-     * @param numLevel current level on
+     * @param b current board
      */
-    public void restartLevel(int numLevel){
-
+    public void restartLevel(Board b){
+        b.removeFrog();
+        b.setFrogRow(0);
+        b.setFrogXIndex(24);
+        b.setFrog();
     }
 
     /**
