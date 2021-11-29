@@ -1,8 +1,10 @@
 package src;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.PriorityQueue;
 
 public class GameLoop implements KeyListener {
@@ -10,12 +12,9 @@ public class GameLoop implements KeyListener {
     private int score;
 
     private int frogDirection;
-    /**
-     * Big queue of the number of enemies hard-coded in. Basically has the numbers for every level
-     * and continues through until the game is completed.
-     * Will use iterator to keep track of position in queue
-     */
-    private PriorityQueue<ArrayList<Integer>> numEnemies = new PriorityQueue<>();
+
+    private HashMap<Integer, Color> colors = new HashMap<>();
+
     private int level;
     private int lives;
     public GameLoop() {
@@ -30,6 +29,12 @@ public class GameLoop implements KeyListener {
         this.score = score;
         this.level = startingLevel;
         this.lives = 3;
+        this.colors = colors;
+        this.colors.put(1, new Color(113, 52, 52));
+        this.colors.put(2, new Color(37, 134, 22));
+        this.colors.put(3, new Color(155, 110, 29));
+        this.colors.put(4, new Color(126, 26, 159));
+        this.colors.put(5, new Color(43, 45, 185));
     }
     /**
      * Creates a new level, creating a new board for it and resetting the frog's position
@@ -66,6 +71,10 @@ public class GameLoop implements KeyListener {
     }
 
     public int getLives() { return this.lives; }
+
+    public Color getColor(int level){
+        return this.colors.get(level);
+    }
 
     public void setLives(int newLives){
         this.lives = newLives;
@@ -104,6 +113,9 @@ public class GameLoop implements KeyListener {
     public int getFrogDirection(){
         return this.frogDirection;
     }
+
+
+
 
     @Override
     public void keyTyped(KeyEvent e) {

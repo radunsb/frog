@@ -31,7 +31,7 @@ public class BenTests extends JPanel implements KeyListener{
 
         Font textFont = new Font(Font.MONOSPACED, Font.PLAIN, 24);
         label.setFont(textFont);
-        label.setForeground(fg);
+        label.setForeground(g.getColor(g.getLevel()));
         label.setBackground(bg);
         frame.add(label);
 
@@ -62,6 +62,7 @@ public class BenTests extends JPanel implements KeyListener{
                         break;
                     }
                    g.setLevel(g.getLevel() + 1);
+                    label.setForeground(g.getColor(g.getLevel()));
                    b = g.runLevel(g.getLevel());
                 }
                 frogD = 0;
