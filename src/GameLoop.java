@@ -22,6 +22,12 @@ public class GameLoop implements KeyListener {
         this.score = score;
         this.level = 1;
         this.lives = 3;
+        this.colors = colors;
+        this.colors.put(1, new Color(113, 52, 52));
+        this.colors.put(2, new Color(37, 134, 22));
+        this.colors.put(3, new Color(155, 110, 29));
+        this.colors.put(4, new Color(126, 26, 159));
+        this.colors.put(5, new Color(43, 45, 185));
     }
 
     public GameLoop(int startingLevel){
@@ -72,6 +78,11 @@ public class GameLoop implements KeyListener {
 
     public int getLives() { return this.lives; }
 
+    /**
+     *
+     * @param level current level player is on
+     * @return The color associated with the level
+     */
     public Color getColor(int level){
         return this.colors.get(level);
     }
