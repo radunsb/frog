@@ -82,7 +82,7 @@ public class Board {
                 throw new IllegalArgumentException("ERROR: input out of range 1 - 10");
             }
         }
-        int rowSpeedRange = (int) (Math.sqrt( (20.0 / rowSpeedCoef))) + 1;
+        int rowSpeedRange = (int) (Math.sqrt( (20.0 / (rowSpeedCoef)))) + 1;
         int sNumEnemies = (numEnemiesCoef / 2) + 4;
         int gNumEnemies = (numEnemiesCoef * 2) - 4;
         for (int i = 0; i < numRows; i++) {
