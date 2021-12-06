@@ -15,6 +15,8 @@ public class Board {
     private int frogCurrentRow;
     // Stores the x coordinate of the frog (updated when frog is moved)
     private int frogXIndex;
+    //Stores the score for this specific level
+    private int boardScore;
 
     public Board(int boardWidth, int boardHeight) {
         this.rows = new ArrayList<>();
@@ -23,6 +25,7 @@ public class Board {
         numFrames = 0;
         frogXIndex = boardWidth / 2;
         frogCurrentRow = 0;
+        this.boardScore = 300;
     }
 
     public Board() {
@@ -30,6 +33,7 @@ public class Board {
         numFrames = 0;
         frogXIndex = 24;
         frogCurrentRow = 0;
+        this.boardScore = 300;
     }
 
     public Board(double emptyRowCoef, int rowSpeedCoef, int numEnemiesCoef) {
@@ -37,7 +41,9 @@ public class Board {
         numFrames = 0;
         frogXIndex = 24;
         frogCurrentRow = 0;
+        this.boardScore = 300;
         buildBoard(emptyRowCoef, rowSpeedCoef, numEnemiesCoef);
+
     }
 
     /**
@@ -202,8 +208,13 @@ public class Board {
     public void removeFrog(){
         rows.get(frogCurrentRow).frogLeaves(frogXIndex);
     }
-    public void setFrog(int row){
-        rows.get(row).frogAppears(frogXIndex);
+
+    public int getBoardScore(){
+        return this.boardScore;
+    }
+
+    public void setBoardScore(int newScore){
+        this.boardScore = newScore;
     }
 
     public void moveFrog(int moveCode) throws Exception {

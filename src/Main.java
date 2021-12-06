@@ -8,6 +8,7 @@ public class Main extends JPanel implements KeyListener {
     static int frogD = 0;
     static boolean inGame = false;
     static boolean playing = true;
+
     public Main() {
         addKeyListener(this);
     }
@@ -20,15 +21,14 @@ public class Main extends JPanel implements KeyListener {
         JFrame frame = new JFrame("Frogger");
         Color bg = new Color(30, 30, 32);
         Color fg = new Color(200, 120, 100);
-        frame.addKeyListener(mainObject);
-        frame.pack();
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(840, 680);
+
+
+
+
 
         while(playing) {
-            if (inGame) {
 
+            Font textFont = new Font(Font.MONOSPACED, Font.PLAIN, 24);
                 frame.addKeyListener(mainObject);
                 frame.pack();
                 frame.setVisible(true);
@@ -36,7 +36,7 @@ public class Main extends JPanel implements KeyListener {
                 frame.setSize(840, 680);
                 JTextArea label = new JTextArea(b.drawBoardString(g.getLevel(), g.getScore(), g.getLives()));
 
-                Font textFont = new Font(Font.MONOSPACED, Font.PLAIN, 24);
+
                 label.setFont(textFont);
                 label.setForeground(g.getColor(g.getLevel()));
                 label.setBackground(bg);
@@ -57,13 +57,15 @@ public class Main extends JPanel implements KeyListener {
                                 g.setLives(g.getLives() - 1);
                             } else {
                                 hasCollided = true;
-                                label.setText("Game over.");
+                                label.setText("Game over.\nScore: " + g.getScore());
                                 break;
                             }
                         }
                         if (b.completeBoard()) {
+                            g.setScore(g.getScore() + b.getBoardScore());
                             if (g.getLevel() == 5) {
-                                label.setText("You Win!");
+                                g.setScore(g.getScore() + 100);
+                                label.setText("You Win!\nScore: " + g.getScore());
                                 hasCollided = true;
                                 break;
                             }
@@ -71,8 +73,9 @@ public class Main extends JPanel implements KeyListener {
                             label.setForeground(g.getColor(g.getLevel()));
                             b = g.runLevel(g.getLevel());
                         }
+                        b.setBoardScore(b.getBoardScore() - 1);
                         frogD = 0;
-                        label.setText(b.drawBoardString(g.getLevel(), g.getScore(), g.getLives()));
+                        label.setText(b.drawBoardString(g.getLevel(), b.getBoardScore(), g.getLives()));
                         time = System.currentTimeMillis();
                     }
                     if(!hasCollided){
@@ -81,17 +84,9 @@ public class Main extends JPanel implements KeyListener {
                 }
                 b.drawBoard();
             }
-            else {
-                JTextArea title = new JTextArea("Not Frogger");
-                Font textFont = new Font(Font.MONOSPACED, Font.PLAIN, 24);
-                title.setFont(textFont);
-                title.setForeground(g.getColor(g.getLevel()));
-                title.setBackground(bg);
-                frame.add(title);
 
-            }
         }
-    }
+
 
 
     @Override
@@ -101,7 +96,7 @@ public class Main extends JPanel implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if(inGame) {
+
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_LEFT -> frogD = 3;
                 case KeyEvent.VK_UP -> frogD = 1;
@@ -110,11 +105,8 @@ public class Main extends JPanel implements KeyListener {
                 default -> frogD = 0;
             }
         }
-        else{
 
-            inGame = true;
-        }
-    }
+
 
     @Override
     public void keyReleased(KeyEvent e) {
