@@ -92,10 +92,6 @@ public class Row {
         return sb.toString();
     }
 
-    // Methods for testing purposes
-    public void setFrog(int x) {
-        units.set(x, new Player());
-    }
 
     public void setEnemy(int x) {
         units.set(x, new Enemy());
