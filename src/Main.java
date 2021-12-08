@@ -98,10 +98,10 @@ public class Main extends JPanel implements KeyListener {
     public void keyPressed(KeyEvent e) {
 
             switch (e.getKeyCode()) {
-                case KeyEvent.VK_LEFT -> frogD = 3;
-                case KeyEvent.VK_UP -> frogD = 1;
-                case KeyEvent.VK_RIGHT -> frogD = 4;
-                case KeyEvent.VK_DOWN -> frogD = 2;
+                case KeyEvent.VK_LEFT, KeyEvent.VK_A -> frogD = 3;
+                case KeyEvent.VK_UP, KeyEvent.VK_W -> frogD = 1;
+                case KeyEvent.VK_RIGHT, KeyEvent.VK_D -> frogD = 4;
+                case KeyEvent.VK_DOWN, KeyEvent.VK_S -> frogD = 2;
                 default -> frogD = 0;
             }
         }
