@@ -29,29 +29,6 @@ public class Board {
     }
 
     /**
-     * constructs Rows for the number of rows in the board
-     */
-    public void buildBoard() {
-        // Rowspeed hard coded to 1
-        // Enemies hard coded to the number of the row
-        for (int i = 0; i < numRows; i++) {
-            rows.add(new Row(1, i, rowSize));
-        }
-        // Checks to make sure there is not an enemy in the spot to spawn the frog
-        while ((rows.get(frogCurrentRow).hasEnemy(frogXIndex))) {
-            System.out.println("This loop be running");
-            try {
-                rows.get(frogCurrentRow).rowShift(numFrames, frogXIndex);
-            } catch (Exception e) {
-                System.out.println("It is literally impossible for this error to be thrown. " +
-                        "If this happens I will be very surprised");
-            }
-        }
-        // Spawn frog
-        setFrog();
-    }
-
-    /**
      *
      * @param emptyRowCoef [range: 0.0 - 1.0] is the probability that a given row will be initialized empty
      *                     (like a patch of grass in frogger)
