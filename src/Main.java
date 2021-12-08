@@ -3,19 +3,45 @@ package src;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.*;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 
 public class Main extends JPanel implements KeyListener {
     static int frogD = 0;
     //used to prevent movement for a short bit after the frog dies(.5s) or completes a level(.25s)
     static int timeBuffer = 10;
 
+    static Clip clip;
+    static AudioInputStream aoStream;
+
+
+    /** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     * Background song. Disable if it makes game too laggy
+     */
+
+    static boolean enableSound = true;
+
     public Main() {
         addKeyListener(this);
     }
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
+        //Audio stuff
+        if(enableSound) {
+            aoStream = AudioSystem.getAudioInputStream(new File("background.wav"));
+            clip = AudioSystem.getClip();
+            clip.open(aoStream);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            clip.start();
+        }
         /**
          * Setting up the JFrame, starting the Game and running the first level
          */
