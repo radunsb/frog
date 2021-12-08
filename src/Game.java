@@ -5,19 +5,17 @@ import java.awt.*;
 import java.util.HashMap;
 
 
-public class Game{
-    //This is your TOTAL score, not just for each level
+public class GameLoop{
+
     private int score;
-    //direction the frog is going to move in
+
     private int frogDirection;
-    //HashMap of the colors for each of the five levels
+
     private HashMap<Integer, Color> colors = new HashMap<>();
-    //Current level
+
     private int level;
-    //Current number of lives
     private int lives;
-    //Creates a game, defaulting to level 1
-    public Game() {
+    public GameLoop() {
         this.frogDirection = frogDirection;
         this.score = score;
         this.level = 1;
@@ -29,8 +27,8 @@ public class Game{
         this.colors.put(4, new Color(126, 26, 159));
         this.colors.put(5, new Color(43, 45, 185));
     }
-    //Creates a Game with a specified starting level
-    public Game(int startingLevel){
+
+    public GameLoop(int startingLevel){
         this.frogDirection = frogDirection;
         this.score = score;
         this.level = startingLevel;
@@ -76,17 +74,10 @@ public class Game{
         return this.score;
     }
 
-    /**
-     * Sets the score
-     * @param newScore new score to be set to
-     */
     public void setScore(int newScore){
         this.score = newScore;
     }
 
-    /**
-     * @return current number of lives
-     */
     public int getLives() { return this.lives; }
 
     /**
@@ -98,10 +89,6 @@ public class Game{
         return this.colors.get(level);
     }
 
-    /**
-     * Sets number of lives, used when frog dies
-     * @param newLives new number of lives to be set to
-     */
     public void setLives(int newLives){
         this.lives = newLives;
     }

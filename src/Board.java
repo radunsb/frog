@@ -18,24 +18,6 @@ public class Board {
     //Stores the score for this specific level
     private int boardScore;
 
-    public Board(int boardWidth, int boardHeight) {
-        this.rows = new ArrayList<>();
-        numRows = boardHeight;
-        rowSize = boardWidth;
-        numFrames = 0;
-        frogXIndex = boardWidth / 2;
-        frogCurrentRow = 0;
-        this.boardScore = 300;
-    }
-
-    public Board() {
-        this.rows = new ArrayList<>();
-        numFrames = 0;
-        frogXIndex = 24;
-        frogCurrentRow = 0;
-        this.boardScore = 300;
-    }
-
     public Board(double emptyRowCoef, int rowSpeedCoef, int numEnemiesCoef) {
         this.rows = new ArrayList<>();
         numFrames = 0;
@@ -44,29 +26,6 @@ public class Board {
         this.boardScore = 300;
         buildBoard(emptyRowCoef, rowSpeedCoef, numEnemiesCoef);
 
-    }
-
-    /**
-     * constructs Rows for the number of rows in the board
-     */
-    public void buildBoard() {
-        // Rowspeed hard coded to 1
-        // Enemies hard coded to the number of the row
-        for (int i = 0; i < numRows; i++) {
-            rows.add(new Row(1, i, rowSize));
-        }
-        // Checks to make sure there is not an enemy in the spot to spawn the frog
-        while ((rows.get(frogCurrentRow).hasEnemy(frogXIndex))) {
-            System.out.println("This loop be running");
-            try {
-                rows.get(frogCurrentRow).rowShift(numFrames, frogXIndex);
-            } catch (Exception e) {
-                System.out.println("It is literally impossible for this error to be thrown. " +
-                        "If this happens I will be very surprised");
-            }
-        }
-        // Spawn frog
-        setFrog();
     }
 
     /**
@@ -152,7 +111,6 @@ public class Board {
         System.out.print(sb);
     }
 
-    // Will probably need to be removed
     public String drawBoardString(int level, int score, int lives){
         StringBuilder sb = new StringBuilder();
         for (int i = numRows - 1; i >= 0; i--) {
@@ -164,32 +122,10 @@ public class Board {
     }
 
     /**
-     *
-     * @return The string representing the board object
-     * makes it easy to print without a redundant method call [ print(Board) v. print(Board.drawBoardString()) ]
-     */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = numRows - 1; i >= 0; i--) {
-            sb.append(rows.get(i).toString());
-            sb.append("\n");
-        }
-        return sb.toString();
-    }
-
-    /**
      *  @return if the board is currently completed
      */
     public boolean completeBoard() {
         return (frogCurrentRow == (numRows-1));
-    }
-
-    /**
-     * @return number of frames that have been processed so far
-     */
-    public int getNumFrames() {
-        return numFrames;
     }
 
     public void setFrogRow(int row){

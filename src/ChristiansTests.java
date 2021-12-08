@@ -60,46 +60,46 @@ public class ChristiansTests {
 //        b2.clearBoard();
 
 
-        Board b = new Board(24,2);
-        b.buildBoard();
-        b.drawBoard();
-        boolean hasCollided = false;
-        long time = System.currentTimeMillis();
-        while(!hasCollided){
-            long time2 = System.currentTimeMillis() - time;
-            // Look for movement
-            if(time2 > 250) {
-                try {
-                    int dir = (int) (Math.random()*5);
-                    switch (dir) {
-                        case 0:
-                            System.out.println("No movement");
-                            break;
-                        case 1:
-                            System.out.println("Up");
-                            break;
-                        case 2:
-                            System.out.println("Down");
-                            break;
-                        case 3:
-                            System.out.println("Left");
-                            break;
-                        case 4:
-                            System.out.println("Right");
-                            break;
-                    }
-                    b.boardShift(dir);
-                } catch (Exception e) {
-                    System.out.println(e);
-                    hasCollided = true;
-                    break;
-                }
-
-                b.drawBoard();
-                time = System.currentTimeMillis();
-            }
-
-        }
-        System.out.println(b.getNumFrames());
+//        Board b = new Board(24,2);
+//        b.buildBoard();
+//        b.drawBoard();
+//        boolean hasCollided = false;
+//        long time = System.currentTimeMillis();
+//        while(!hasCollided){
+//            long time2 = System.currentTimeMillis() - time;
+//            // Look for movement
+//            if(time2 > 250) {
+//                try {
+//                    int dir = (int) (Math.random()*5);
+//                    switch (dir) {
+//                        case 0:
+//                            System.out.println("No movement");
+//                            break;
+//                        case 1:
+//                            System.out.println("Up");
+//                            break;
+//                        case 2:
+//                            System.out.println("Down");
+//                            break;
+//                        case 3:
+//                            System.out.println("Left");
+//                            break;
+//                        case 4:
+//                            System.out.println("Right");
+//                            break;
+//                    }
+//                    b.boardShift(dir);
+//                } catch (Exception e) {
+//                    System.out.println(e);
+//                    hasCollided = true;
+//                    break;
+//                }
+//
+//                b.drawBoard();
+//                time = System.currentTimeMillis();
+//            }
+//
+//        }
+//        System.out.println(b.getNumFrames());
     }
 }
