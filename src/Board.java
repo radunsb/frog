@@ -111,7 +111,6 @@ public class Board {
         System.out.print(sb);
     }
 
-    // Will probably need to be removed
     public String drawBoardString(int level, int score, int lives){
         StringBuilder sb = new StringBuilder();
         for (int i = numRows - 1; i >= 0; i--) {
@@ -119,21 +118,6 @@ public class Board {
             sb.append("\n");
         }
         sb.append("Level: " + level + "        Score: " + score + "        Lives: " + lives);
-        return sb.toString();
-    }
-
-    /**
-     *
-     * @return The string representing the board object
-     * makes it easy to print without a redundant method call [ print(Board) v. print(Board.drawBoardString()) ]
-     */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = numRows - 1; i >= 0; i--) {
-            sb.append(rows.get(i).toString());
-            sb.append("\n");
-        }
         return sb.toString();
     }
 
