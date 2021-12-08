@@ -49,19 +49,19 @@ public class Row {
                     // Checks if there is a frog in the current position
                     // If so, move frog to left to compensate for row shift
                 } else if (units.get(i) instanceof Player) {
-                   containsFrog = true;
+                    containsFrog = true;
                 }
             }
-                if(units.get(rowSize-1) instanceof Enemy && units.get(0) instanceof Player){
-                    //Specific case of character dying from enemies scrolling over
-                    throw new Exception("Collision Detected");
-                }
-                if(units.get(rowSize-1) instanceof Player){
-                    units.add(0, units.remove(rowSize-2));
-                }
-                else {
-                    units.add(0, units.remove(rowSize - 1));
-                }
+            if(units.get(rowSize-1) instanceof Enemy && units.get(0) instanceof Player){
+                //Specific case of character dying from enemies scrolling over
+                throw new Exception("Collision Detected");
+            }
+            if(units.get(rowSize-1) instanceof Player){
+                units.add(0, units.remove(rowSize-2));
+            }
+            else {
+                units.add(0, units.remove(rowSize - 1));
+            }
             if(containsFrog) {
                 if(frogX < rowSize-1) {
                     units.add(frogX, units.remove(frogX + 1));
@@ -120,7 +120,7 @@ public class Row {
         return units.get(x) instanceof Enemy;
     }
 
-    //nReplaces the frog unit in a given row with ground
+    // Replaces the frog unit in a given row with ground
     public void frogLeaves(int x) {
         units.set(x, new Ground());
     }

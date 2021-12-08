@@ -40,10 +40,20 @@ public class ChristiansTests2 extends JPanel implements KeyListener{
             // Look for movement
             if(time2 > 50) { // 20 frames per second
                 try {
-                    b.boardShift(frogD);
+                    int code = b.boardShift(frogD);
+                    if (code == 1) {
+                        hasCollided = true;
+                        label.setText("Game over. The new code system detected collision");
+                        break;
+                    } else if (code == 2) {
+                        System.out.println("Bumped into side");
+                    } else if (code == 3) {
+                        System.out.println("Board completed");
+                    }
                 } catch (Exception e) {
                     hasCollided = true;
                     label.setText("Game over.");
+                    System.out.println(e);
                     break;
                 }
                 frogD = 0;

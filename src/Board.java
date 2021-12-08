@@ -18,24 +18,6 @@ public class Board {
     //Stores the score for this specific level
     private int boardScore;
 
-    public Board(int boardWidth, int boardHeight) {
-        this.rows = new ArrayList<>();
-        numRows = boardHeight;
-        rowSize = boardWidth;
-        numFrames = 0;
-        frogXIndex = boardWidth / 2;
-        frogCurrentRow = 0;
-        this.boardScore = 300;
-    }
-
-    public Board() {
-        this.rows = new ArrayList<>();
-        numFrames = 0;
-        frogXIndex = 24;
-        frogCurrentRow = 0;
-        this.boardScore = 300;
-    }
-
     public Board(double emptyRowCoef, int rowSpeedCoef, int numEnemiesCoef) {
         this.rows = new ArrayList<>();
         numFrames = 0;
