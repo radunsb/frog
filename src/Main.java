@@ -6,8 +6,7 @@ import java.awt.event.KeyListener;
 import javax.swing.*;
 public class Main extends JPanel implements KeyListener {
     static int frogD = 0;
-    static boolean inGame = false;
-    static boolean playing = true;
+
 
     public Main() {
         addKeyListener(this);

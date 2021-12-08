@@ -5,7 +5,7 @@ import java.awt.*;
 import java.util.HashMap;
 
 
-public class GameLoop{
+public class Game{
 
     private int score;
 
@@ -15,7 +15,7 @@ public class GameLoop{
 
     private int level;
     private int lives;
-    public GameLoop() {
+    public Game() {
         this.frogDirection = frogDirection;
         this.score = score;
         this.level = 1;
@@ -28,7 +28,7 @@ public class GameLoop{
         this.colors.put(5, new Color(43, 45, 185));
     }
 
-    public GameLoop(int startingLevel){
+    public Game(int startingLevel){
         this.frogDirection = frogDirection;
         this.score = score;
         this.level = startingLevel;
