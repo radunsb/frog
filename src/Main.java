@@ -6,7 +6,8 @@ import java.awt.event.KeyListener;
 import javax.swing.*;
 public class Main extends JPanel implements KeyListener {
     static int frogD = 0;
-
+    //used to prevent movement for a short bit after the frog dies(.5s) or completes a level(.25s)
+    static int timeBuffer = 10;
 
     public Main() {
         addKeyListener(this);
@@ -35,6 +36,7 @@ public class Main extends JPanel implements KeyListener {
         JTextArea label = new JTextArea(b.drawBoardString(g.getLevel(), g.getScore(), g.getLives()));
 
 
+
         label.setFont(textFont);
         label.setForeground(g.getColor(g.getLevel()));
         label.setBackground(bg);
@@ -46,6 +48,9 @@ public class Main extends JPanel implements KeyListener {
             long time2 = System.currentTimeMillis() - time;
             // Look for movement
             if (time2 > 50) { // 20 frames per second
+                if(timeBuffer < 10) {
+                    timeBuffer++;
+                }
                 //Tries to shift the board, if it can't do it, it assumes that the frog has hit an enemy
                 //Well aware this isn't a great way to do collision testing
                 try {
@@ -55,7 +60,7 @@ public class Main extends JPanel implements KeyListener {
                     if (g.getLives() > 1) {
                         g.restartLevel(b);
                         g.setLives(g.getLives() - 1);
-
+                        timeBuffer = 0;
                     }
                     //Otherwise you get a game over
                     else {
@@ -79,9 +84,13 @@ public class Main extends JPanel implements KeyListener {
                     g.setLevel(g.getLevel() + 1);
                     label.setForeground(g.getColor(g.getLevel()));
                     b = g.runLevel(g.getLevel());
+                    timeBuffer = 5;
                 }
                 //Reset some other stuff and update the label
-                b.setBoardScore(b.getBoardScore() - 1);
+                //score low-caps at 50
+                    if(b.getBoardScore() > 50) {
+                        b.setBoardScore(b.getBoardScore() - 1);
+                    }
                 frogD = 0;
                 label.setText(b.drawBoardString(g.getLevel(), b.getBoardScore(), g.getLives()));
                 time = System.currentTimeMillis();
@@ -105,13 +114,14 @@ public class Main extends JPanel implements KeyListener {
      */
     @Override
     public void keyPressed(KeyEvent e) {
-
-            switch (e.getKeyCode()) {
-                case KeyEvent.VK_LEFT, KeyEvent.VK_A -> frogD = 3;
-                case KeyEvent.VK_UP, KeyEvent.VK_W -> frogD = 1;
-                case KeyEvent.VK_RIGHT, KeyEvent.VK_D -> frogD = 4;
-                case KeyEvent.VK_DOWN, KeyEvent.VK_S -> frogD = 2;
-                default -> frogD = 0;
+            if(timeBuffer >= 10) {
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_LEFT, KeyEvent.VK_A -> frogD = 3;
+                    case KeyEvent.VK_UP, KeyEvent.VK_W -> frogD = 1;
+                    case KeyEvent.VK_RIGHT, KeyEvent.VK_D -> frogD = 4;
+                    case KeyEvent.VK_DOWN, KeyEvent.VK_S -> frogD = 2;
+                    default -> frogD = 0;
+                }
             }
         }
 

@@ -6,15 +6,17 @@ import java.util.HashMap;
 
 
 public class Game{
-
+    //TOTAL score, not just for the specific level
     private int score;
-
+    //Frog's current direction
     private int frogDirection;
-
+    //Map of the colors for each of the five levels
     private HashMap<Integer, Color> colors = new HashMap<>();
-
+    //Current level
     private int level;
+    //Current Number of remaining lives
     private int lives;
+
     public Game() {
         this.frogDirection = frogDirection;
         this.score = score;
@@ -74,10 +76,17 @@ public class Game{
         return this.score;
     }
 
+    /**
+     * Sets the score, updated every frame by lowering by one
+     * @param newScore new score
+     */
     public void setScore(int newScore){
         this.score = newScore;
     }
 
+    /**
+     * @return current number of lives
+     */
     public int getLives() { return this.lives; }
 
     /**
@@ -89,6 +98,10 @@ public class Game{
         return this.colors.get(level);
     }
 
+    /**
+     * Sets the number of lives, used when frog dies
+     * @param newLives New number of lives
+     */
     public void setLives(int newLives){
         this.lives = newLives;
     }
