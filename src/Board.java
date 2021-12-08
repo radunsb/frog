@@ -128,13 +128,6 @@ public class Board {
         return (frogCurrentRow == (numRows-1));
     }
 
-    /**
-     * @return number of frames that have been processed so far
-     */
-    public int getNumFrames() {
-        return numFrames;
-    }
-
     public void setFrogRow(int row){
         this.frogCurrentRow = row;
     }
