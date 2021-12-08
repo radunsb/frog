@@ -14,7 +14,7 @@ public class BenTests extends JPanel implements KeyListener{
     }
     public static void main(String[] args){
         BenTests mainObject = new BenTests();
-        GameLoop g = new GameLoop(1);
+        Game g = new Game(1);
         Board b = g.runLevel(g.getLevel());
 
         JFrame frame = new JFrame("Frogger");
