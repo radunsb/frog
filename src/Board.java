@@ -48,8 +48,8 @@ public class Board {
             }
         }
         int rowSpeedRange = (int) (Math.sqrt( (20.0 / (rowSpeedCoef)))) + 1;
-        int sNumEnemies = (numEnemiesCoef / 2) + 4;
-        int gNumEnemies = (numEnemiesCoef * 2) - 4;
+        int sNumEnemies = (numEnemiesCoef);
+        int gNumEnemies = Integer.max(((numEnemiesCoef * 2) - 4), sNumEnemies+1);
         for (int i = 0; i < numRows; i++) {
             if (Math.random() < emptyRowCoef) {
                 rows.add(new Row(1, 0, rowSize));

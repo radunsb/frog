@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.*;
+
 public class Main extends JPanel implements KeyListener {
     static int frogD = 0;
     //used to prevent movement for a short bit after the frog dies(.5s) or completes a level(.25s)
